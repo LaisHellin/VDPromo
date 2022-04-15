@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "4d6ae202-2bb2-48de-93ee-78ffe8f92eea",
+		"name": "ValidPromotions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Campo obrigatorio",
+			"item": [
+				{
+					"name": "Retono valido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has a valid JSON body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "08489ed1aa2a4640aab02a8082c54cbf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promotions/validPromotions?personCode=4516615&collectionMode=2&businessModelCode=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promotions",
+								"validPromotions"
+							],
+							"query": [
+								{
+									"key": "personCode",
+									"value": "4516615"
+								},
+								{
+									"key": "collectionMode",
+									"value": "2"
+								},
+								{
+									"key": "businessModelCode",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorno invalido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has a valid JSON body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "08489ed1aa2a4640aab02a8082c54cbf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/promotions/validPromotions",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"promotions",
+								"validPromotions"
+							],
+							"query": [
+								{
+									"key": "personCode",
+									"value": "4516615",
+									"disabled": true
+								},
+								{
+									"key": "collectionMode",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "businessModelCode",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personCode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has a valid JSON body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "08489ed1aa2a4640aab02a8082c54cbf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/promotions/validPromotions?personCode=&collectionMode=2&businessModelCode=1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"promotions",
+								"validPromotions"
+							],
+							"query": [
+								{
+									"key": "personCode",
+									"value": ""
+								},
+								{
+									"key": "collectionMode",
+									"value": "2"
+								},
+								{
+									"key": "businessModelCode",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "collectionMode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has a valid JSON body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "08489ed1aa2a4640aab02a8082c54cbf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/promotions/validPromotions?personCode=4516615&collectionMode=&businessModelCode=1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"promotions",
+								"validPromotions"
+							],
+							"query": [
+								{
+									"key": "personCode",
+									"value": "4516615"
+								},
+								{
+									"key": "collectionMode",
+									"value": ""
+								},
+								{
+									"key": "businessModelCode",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "businessModelCode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has a valid JSON body\", function () {\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "08489ed1aa2a4640aab02a8082c54cbf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/promotions/validPromotions?personCode=4516615&collectionMode=2&businessModelCode",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"promotions",
+								"validPromotions"
+							],
+							"query": [
+								{
+									"key": "personCode",
+									"value": "4516615"
+								},
+								{
+									"key": "collectionMode",
+									"value": "2"
+								},
+								{
+									"key": "businessModelCode",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Construção",
+			"item": [
+				{
+					"name": "Create Resource",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "08489ed1aa2a4640aab02a8082c54cbf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"vehicleType\": \"train\",\r\n\t\"maxSpeed\": 125,\r\n\t\"avgSpeed\": 90,\r\n\t\"speedUnit\": \"mph\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://dapi-sgi.grupoboticario.digital/echo/resource"
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Resource",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "08489ed1aa2a4640aab02a8082c54cbf",
+								"type": "text"
+							}
+						],
+						"url": "https://dapi-sgi.grupoboticario.digital/echo/resource"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Resource",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "08489ed1aa2a4640aab02a8082c54cbf",
+								"type": "text"
+							}
+						],
+						"url": "https://dapi-sgi.grupoboticario.digital/echo/resource"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Promoções válidas de acordo com os parâmetros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has a valid JSON body\", function () {\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/promotions/validPromotions?personCode=4516615&collectionMode=2&businessModelCode=1&cycleNumber=&functionCode=&roleCode=&commercialStructureCode=&geographicalStructureCode=&distributionCenterCode=&isWithdrawalCenter=&businessRoleActive=&businessRoleActive=&businessRoleInactive=&businessRoleInactive=",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"promotions",
+						"validPromotions"
+					],
+					"query": [
+						{
+							"key": "personCode",
+							"value": "4516615"
+						},
+						{
+							"key": "collectionMode",
+							"value": "2"
+						},
+						{
+							"key": "businessModelCode",
+							"value": "1"
+						},
+						{
+							"key": "cycleNumber",
+							"value": ""
+						},
+						{
+							"key": "functionCode",
+							"value": ""
+						},
+						{
+							"key": "roleCode",
+							"value": ""
+						},
+						{
+							"key": "commercialStructureCode",
+							"value": ""
+						},
+						{
+							"key": "geographicalStructureCode",
+							"value": ""
+						},
+						{
+							"key": "distributionCenterCode",
+							"value": ""
+						},
+						{
+							"key": "isWithdrawalCenter",
+							"value": ""
+						},
+						{
+							"key": "businessRoleActive",
+							"value": ""
+						},
+						{
+							"key": "businessRoleActive",
+							"value": ""
+						},
+						{
+							"key": "businessRoleInactive",
+							"value": ""
+						},
+						{
+							"key": "businessRoleInactive",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Valid promotions code list",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/promotions/validPromotions?personCode=-14258573&collectionMode=-14258573&businessModelCode=-14258573&date=1994-07-12T09:19:02.920Z&cycleNumber=-14258573&functionCode=-14258573&roleCode=-14258573&commercialStructureCode=-14258573&geographicalStructureCode=-14258573&distributionCenterCode=-14258573&isWithdrawalCenter=false&businessRoleActive=deserunt consequat esse&businessRoleActive=dolore adipisicing&businessRoleInactive=deserunt consequat esse&businessRoleInactive=dolore adipisicing",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"promotions",
+								"validPromotions"
+							],
+							"query": [
+								{
+									"key": "personCode",
+									"value": "-14258573"
+								},
+								{
+									"key": "collectionMode",
+									"value": "-14258573"
+								},
+								{
+									"key": "businessModelCode",
+									"value": "-14258573"
+								},
+								{
+									"key": "date",
+									"value": "1994-07-12T09:19:02.920Z"
+								},
+								{
+									"key": "cycleNumber",
+									"value": "-14258573"
+								},
+								{
+									"key": "functionCode",
+									"value": "-14258573"
+								},
+								{
+									"key": "roleCode",
+									"value": "-14258573"
+								},
+								{
+									"key": "commercialStructureCode",
+									"value": "-14258573"
+								},
+								{
+									"key": "geographicalStructureCode",
+									"value": "-14258573"
+								},
+								{
+									"key": "distributionCenterCode",
+									"value": "-14258573"
+								},
+								{
+									"key": "isWithdrawalCenter",
+									"value": "false"
+								},
+								{
+									"key": "businessRoleActive",
+									"value": "deserunt consequat esse"
+								},
+								{
+									"key": "businessRoleActive",
+									"value": "dolore adipisicing"
+								},
+								{
+									"key": "businessRoleInactive",
+									"value": "deserunt consequat esse"
+								},
+								{
+									"key": "businessRoleInactive",
+									"value": "dolore adipisicing"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n  {\n    \"Code\": -97846320,\n    \"ApplicationOrder\": -73158551\n  },\n  {\n    \"Code\": -13245973,\n    \"ApplicationOrder\": 19555251\n  }\n]"
+				}
+			]
+		},
+		{
+			"name": "Retono valido Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has a valid JSON body\", function () {\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "ocp-apim-subscription-key",
+						"value": "08489ed1aa2a4640aab02a8082c54cbf",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/promotions/validPromotions?personCode=6092169&collectionMode=2&businessModelCode=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"promotions",
+						"validPromotions"
+					],
+					"query": [
+						{
+							"key": "personCode",
+							"value": "6092169"
+						},
+						{
+							"key": "collectionMode",
+							"value": "2"
+						},
+						{
+							"key": "businessModelCode",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

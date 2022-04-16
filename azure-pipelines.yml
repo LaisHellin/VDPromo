@@ -28,5 +28,5 @@ stages:
 
           - script: |
               npm install -g newman
-              newman run VDPromo/ValidPromotions.postman_collection.json -e VDPromo/validPromotions.postman_environment.json
+              newman run VDPromo/ValidPromotions.postman_collection.json
             displayName: 'Run Cenários de Testes API Valid Promotions'         

@@ -126,9 +126,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{localhost}}/promotions/validPromotions",
+							"raw": "{{url}}/promotions/validPromotions",
 							"host": [
-								"{{localhost}}"
+								"{{url}}"
 							],
 							"path": [
 								"promotions",
@@ -201,9 +201,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{localhost}}/promotions/validPromotions?personCode=&collectionMode=2&businessModelCode=1",
+							"raw": "{{url}}/promotions/validPromotions?personCode=&collectionMode=2&businessModelCode=1",
 							"host": [
-								"{{localhost}}"
+								"{{url}}"
 							],
 							"path": [
 								"promotions",
@@ -273,9 +273,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{localhost}}/promotions/validPromotions?personCode=4516615&collectionMode=&businessModelCode=1",
+							"raw": "{{url}}/promotions/validPromotions?personCode=4516615&collectionMode=&businessModelCode=1",
 							"host": [
-								"{{localhost}}"
+								"{{url}}"
 							],
 							"path": [
 								"promotions",
@@ -345,9 +345,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{localhost}}/promotions/validPromotions?personCode=4516615&collectionMode=2&businessModelCode",
+							"raw": "{{url}}/promotions/validPromotions?personCode=4516615&collectionMode=2&businessModelCode",
 							"host": [
-								"{{localhost}}"
+								"{{url}}"
 							],
 							"path": [
 								"promotions",
@@ -674,7 +674,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/promotions/validPromotions?personCode=6092169&collectionMode=2&businessModelCode=1",
+					"raw": "{{url}}/promotions/validPromotions?personCode=6092169&collectionMode=1&businessModelCode=1",
 					"host": [
 						"{{url}}"
 					],
@@ -689,7 +689,7 @@
 						},
 						{
 							"key": "collectionMode",
-							"value": "2"
+							"value": "1"
 						},
 						{
 							"key": "businessModelCode",

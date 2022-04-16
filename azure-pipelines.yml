@@ -1,0 +1,32 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+pr:
+  paths:
+    exclude:
+      - README.md
+      - .gitignore
+
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: Tests
+    jobs:
+      - job: Newman
+        pool:
+          name: AWS - Database
+          demands: environment -equals dev
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '16.x'
+            displayName: 'Install Node.js'
+
+          - script: |
+              npm install -g newman
+              newman run VDPromo/ValidPromotions.postman_collection.json -e VDPromo/validPromotions.postman_environment.json
+            displayName: 'Run Cenários de Testes API Valid Promotions'         

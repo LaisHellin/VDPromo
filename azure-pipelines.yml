@@ -13,7 +13,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: Tests
+  - stage: Tests API VD PROMO
     jobs:
       - job: Newman
         steps:
@@ -26,3 +26,7 @@ stages:
               npm install -g newman
               newman run ValidPromotions.postman_collection.json -e ValidPromotions.postman_environment.json
             displayName: 'Run Cenários de Testes Valid Promotion' 
+
+          - script: |
+              newman run Jaspion.postman_collection.json -e apiJaspion.postman_environment.json
+            displayName: 'Run Cenários de Testes Jaspion'             

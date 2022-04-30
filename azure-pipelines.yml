@@ -23,6 +23,6 @@ stages:
             displayName: 'Install Node.js'
 
           - script: |
-              npm install -g newman-reporter-htmlextra
-              newman run ValidPromotions.postman_collection.json -e ValidPromotions.postman_environment.json -r htmlvalidPromo --reporter-htmlextra-darkTheme
+              npm install -g newman
+              newman run ValidPromotions.postman_collection.json -e ValidPromotions.postman_environment.json
             displayName: 'Run Cenários de Testes Valid Promotion'         

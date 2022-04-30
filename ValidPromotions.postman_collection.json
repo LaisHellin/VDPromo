@@ -2,572 +2,2485 @@
 	"info": {
 		"_postman_id": "4d6ae202-2bb2-48de-93ee-78ffe8f92eea",
 		"name": "ValidPromotions",
+		"description": "Retorno de Promoções válidas de acordo com os parâmetros",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Campo obrigatorio",
+			"name": "EUD",
 			"item": [
 				{
-					"name": "Retono valido",
-					"event": [
+					"name": "DEV",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response has a valid JSON body\", function () {\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json;\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ocp-apim-subscription-key",
-								"value": "08489ed1aa2a4640aab02a8082c54cbf",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "Teste de Contrato",
+							"item": [
+								{
+									"name": "Todos os campos",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"//Contract Test\r",
+													"const responseSchema = {\r",
+													"    \"type\": \"array\",\r",
+													"        \"items\": {\r",
+													"        \"type\": \"object\",\r",
+													"        \"properties\": {\r",
+													"            \"Code\": {\r",
+													"                \"type\": \"integer\"\r",
+													"            },\r",
+													"            \"ApplicationOrder\": {\r",
+													"                \"type\": \"integer\"\r",
+													"            }\r",
+													"    },\r",
+													"    \"addionalProperties\": false,\r",
+													"    \"required\": [\"Code\", \"ApplicationOrder\"]\r",
+													"}\r",
+													"};\r",
+													"\r",
+													"// Test for response data structure\r",
+													"pm.test('Should has the correct attributes', () => {\r",
+													"    let jsonData = pm.response.json();\r",
+													"    let validation = tv4.validate(jsonData, responseSchema);\r",
+													"    \r",
+													"    if (!validation) console.log(tv4.error.message);\r",
+													"    pm.expect(validation).to.be.true;\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "ocp-apim-subscription-key",
+												"value": "{{Dev-ocp-apim-subscription-key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber&date&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+											"host": [
+												"{{Dev_url}}"
+											],
+											"path": [
+												"promotions",
+												"validPromotions"
+											],
+											"query": [
+												{
+													"key": "personCode",
+													"value": "6092169"
+												},
+												{
+													"key": "collectionMode",
+													"value": "30"
+												},
+												{
+													"key": "businessModelCode",
+													"value": "1"
+												},
+												{
+													"key": "cycleNumber",
+													"value": null
+												},
+												{
+													"key": "date",
+													"value": null
+												},
+												{
+													"key": "functionCode",
+													"value": null
+												},
+												{
+													"key": "roleCode",
+													"value": null
+												},
+												{
+													"key": "commercialStructureCode",
+													"value": null
+												},
+												{
+													"key": "geographicalStructureCode",
+													"value": ""
+												},
+												{
+													"key": "distributionCenterCode",
+													"value": null
+												},
+												{
+													"key": "isWithdrawalCenter",
+													"value": "false"
+												},
+												{
+													"key": "businessRoleActive",
+													"value": null
+												},
+												{
+													"key": "businessRoleInactive",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
 								}
-							}
+							]
 						},
-						"url": {
-							"raw": "{{url}}/promotions/validPromotions?personCode=4516615&collectionMode=2&businessModelCode=1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"promotions",
-								"validPromotions"
-							],
-							"query": [
+						{
+							"name": "Teste Funcional",
+							"item": [
 								{
-									"key": "personCode",
-									"value": "4516615"
+									"name": "Valid",
+									"item": [
+										{
+											"name": "Retono valido",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "cycleNumber",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202201&date=&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202201"
+														},
+														{
+															"key": "date",
+															"value": ""
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "date",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48471){\r",
+															"            pm.response.to.have.status(200)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202201&date=2022-04-30&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202201"
+														},
+														{
+															"key": "date",
+															"value": "2022-04-30"
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.735 Promoção Válido(a) de 30/04/2022 a 31/05/2022 para pessoa PESSOA NIQCFF. |  |  |\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "commercialStructureCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48473){\r",
+															"            pm.response.to.have.status(200)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202210&date=2022-08-10&functionCode&roleCode&commercialStructureCode=1&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202210"
+														},
+														{
+															"key": "date",
+															"value": "2022-08-10"
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": "1"
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "Estrutura comercial 1\n\nAbrangencia 11737"
+											},
+											"response": []
+										},
+										{
+											"name": "geographicalStrutureCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48467){\r",
+															"            pm.response.to.have.status(200)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=&date=&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=773374&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": ""
+														},
+														{
+															"key": "date",
+															"value": ""
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": "773374"
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.697 | Válido(a) para estrutura geográfica Bairro Cód. 773374 Ipanema, para pessoa PESSOA NIQCFF |\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "distributionCenterCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48474){\r",
+															"            pm.response.to.have.status(200)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202204&date=2022-12-26&functionCode&roleCode&commercialStructureCode=1&geographicalStructureCode=&distributionCenterCode=2&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202204"
+														},
+														{
+															"key": "date",
+															"value": "2022-12-26"
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": "1"
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": "2",
+															"description": "Centro distribuição CD Geral"
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.738 | Promoção | Válido(a) de 04/2022 a 06/2022 para estrutura comercial Diretoria Nacional Cód. 1 Diretor Comercial, para pessoa PESSOA NIQCFF, para centro distribuição CD Geral. |\n\nPromoção: 48.474\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "roleCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"        if (jsonData[i].Code === 48473){\r",
+															"            pm.response.to.have.status(200)\r",
+															"        }\r",
+															"        if (jsonData[i].Code === 48467){\r",
+															"            pm.response.to.have.status(200)            \r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202210&date=2022-12-26&functionCode&roleCode=2&commercialStructureCode=1&geographicalStructureCode=773374&distributionCenterCode=2&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202210"
+														},
+														{
+															"key": "date",
+															"value": "2022-12-26"
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": "2"
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": "1"
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": "773374"
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": "2",
+															"description": "Centro distribuição CD Geral"
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.738 | Promoção | Válido(a) de 04/2022 a 06/2022 para estrutura comercial Diretoria Nacional Cód. 1 Diretor Comercial, para pessoa PESSOA NIQCFF, para centro distribuição CD Geral. |\n\nPromoção: 48.474\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "cycleNumber - geographicalStrutureCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48472){\r",
+															"            pm.response.to.have.status(200)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202205&date=&functionCode&roleCode&commercialStructureCode=&geographicalStructureCode=773374&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202205"
+														},
+														{
+															"key": "date",
+															"value": ""
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": ""
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": "773374"
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.736 | Promoção | Válido(a) de 04/2022 a 09/2022 para estrutura geográfica Bairro Cód. 773374 Ipanema, para pessoa PESSOA NIQCFF. |\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "cycleNumber - date - geographicalStrutureCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48472){\r",
+															"            pm.response.to.have.status(200)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202204&date=2022-12-26&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=773374&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202204"
+														},
+														{
+															"key": "date",
+															"value": "2022-12-26"
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": "773374"
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.736 | Promoção | Válido(a) de 04/2022 a 09/2022 para estrutura geográfica Bairro Cód. 773374 Ipanema, para pessoa PESSOA NIQCFF. |\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "Todos os campos",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48474){\r",
+															"            pm.response.to.have.status(200)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202204&date=20220502&functionCode=1&roleCode=1&commercialStructureCode=1&geographicalStructureCode=6&distributionCenterCode=2&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202204"
+														},
+														{
+															"key": "date",
+															"value": "20220502"
+														},
+														{
+															"key": "functionCode",
+															"value": "1"
+														},
+														{
+															"key": "roleCode",
+															"value": "1"
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": "1"
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": "6"
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": "2"
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
 								},
 								{
-									"key": "collectionMode",
-									"value": "2"
+									"name": "Invalid",
+									"item": [
+										{
+											"name": "Retorno invalido",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=&collectionMode=&businessModelCode=",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": ""
+														},
+														{
+															"key": "collectionMode",
+															"value": ""
+														},
+														{
+															"key": "businessModelCode",
+															"value": ""
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "personCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=&collectionMode=2&businessModelCode=1",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": ""
+														},
+														{
+															"key": "collectionMode",
+															"value": "2"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "collectionMode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=&businessModelCode=1",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": ""
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "businessModelCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {\r",
+															"    pm.response.to.have.status(400);\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=2&businessModelCode",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "2"
+														},
+														{
+															"key": "businessModelCode",
+															"value": null
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "personCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions - Don't locate\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48470){\r",
+															"            pm.response.to.have.status(500)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=453309&collectionMode=30&businessModelCode=1&cycleNumber=&date&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "453309"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": ""
+														},
+														{
+															"key": "date",
+															"value": null
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "**Dado** que eu tenha cadastrado uma promoção para um pessoa X\n\n**Quando** eu fazer a consulta para a pessoa Y\n\n**Então** a promoção cadastrada para a pessoa X NÂO deverá aparecer para a pessoa Y\n\n1.  Tests\n    1.  Status code\n    2.  Tempo de resposta\n    3.  Retorno do JSON"
+											},
+											"response": []
+										},
+										{
+											"name": "cycleNumber",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 404\", function () {\r",
+															"    pm.response.to.have.status(404);\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202102&date=&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202102"
+														},
+														{
+															"key": "date",
+															"value": ""
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "date",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions - Don't locate\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48471){\r",
+															"            pm.response.to.have.status(500)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=202201&date=2022-06-30&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": "202201"
+														},
+														{
+															"key": "date",
+															"value": "2022-06-30"
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.735 Promoção Válido(a) de 30/04/2022 a 31/05/2022 para pessoa PESSOA NIQCFF. |  |  |\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "roleCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions - Don't locate\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48474){\r",
+															"            pm.response.to.have.status(500)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=&date=&functionCode&roleCode=2&commercialStructureCode=&geographicalStructureCode=&distributionCenterCode=&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": ""
+														},
+														{
+															"key": "date",
+															"value": ""
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": "2"
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": ""
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": "",
+															"description": "Centro distribuição CD Geral"
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.738 | Promoção | Válido(a) de 04/2022 a 06/2022 para estrutura comercial Diretoria Nacional Cód. 1 Diretor Comercial, para pessoa PESSOA NIQCFF, para centro distribuição CD Geral. |\n\nPromoção: 48.474\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "commercialStructureCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions - Don't locate\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48467){\r",
+															"            pm.response.to.have.status(500)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=&date=&functionCode&roleCode&commercialStructureCode=1&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": ""
+														},
+														{
+															"key": "date",
+															"value": ""
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": "1"
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "Estrutura comercial 1\n\nAbrangencia 11737"
+											},
+											"response": []
+										},
+										{
+											"name": "geographicalStrutureCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions - Don't locate\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48467){\r",
+															"            pm.response.to.have.status(500)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=&date=&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": ""
+														},
+														{
+															"key": "date",
+															"value": ""
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "Não deverá localizar a promoção que contempla a estrutura geografica cadastrada na abrangencia"
+											},
+											"response": []
+										},
+										{
+											"name": "distributionCenterCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions - Don't locate\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48474){\r",
+															"            pm.response.to.have.status(500)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=&date=&functionCode&roleCode&commercialStructureCode=1&geographicalStructureCode=&distributionCenterCode=2&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": ""
+														},
+														{
+															"key": "date",
+															"value": ""
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": "1"
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": ""
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": "2",
+															"description": "Centro distribuição CD Geral"
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.738 | Promoção | Válido(a) de 04/2022 a 06/2022 para estrutura comercial Diretoria Nacional Cód. 1 Diretor Comercial, para pessoa PESSOA NIQCFF, para centro distribuição CD Geral. |\n\nPromoção: 48.474\n\nEndFragment"
+											},
+											"response": []
+										},
+										{
+											"name": "date - geographicalStrutureCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Extract variables\r",
+															"pm.test(\"Verify code promotions - Don't locate\", function(){\r",
+															"    var jsonData = pm.response.json();\r",
+															"        \r",
+															"    for(var i = 0; i < jsonData.length; i++){\r",
+															"        var number = jsonData[i].Code; \r",
+															"\r",
+															"        if (jsonData[i].Code === 48472){\r",
+															"            pm.response.to.have.status(500)\r",
+															"    }\r",
+															"    }\r",
+															"});\r",
+															"\r",
+															"            \r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "ocp-apim-subscription-key",
+														"value": "{{Dev-ocp-apim-subscription-key}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Dev_url}}/promotions/validPromotions?personCode=6092169&collectionMode=30&businessModelCode=1&cycleNumber=&date=2022-08-26&functionCode&roleCode&commercialStructureCode&geographicalStructureCode=773374&distributionCenterCode&isWithdrawalCenter=false&businessRoleActive&businessRoleInactive",
+													"host": [
+														"{{Dev_url}}"
+													],
+													"path": [
+														"promotions",
+														"validPromotions"
+													],
+													"query": [
+														{
+															"key": "personCode",
+															"value": "6092169"
+														},
+														{
+															"key": "collectionMode",
+															"value": "30"
+														},
+														{
+															"key": "businessModelCode",
+															"value": "1"
+														},
+														{
+															"key": "cycleNumber",
+															"value": ""
+														},
+														{
+															"key": "date",
+															"value": "2022-08-26"
+														},
+														{
+															"key": "functionCode",
+															"value": null
+														},
+														{
+															"key": "roleCode",
+															"value": null
+														},
+														{
+															"key": "commercialStructureCode",
+															"value": null
+														},
+														{
+															"key": "geographicalStructureCode",
+															"value": "773374"
+														},
+														{
+															"key": "distributionCenterCode",
+															"value": null
+														},
+														{
+															"key": "isWithdrawalCenter",
+															"value": "false"
+														},
+														{
+															"key": "businessRoleActive",
+															"value": null
+														},
+														{
+															"key": "businessRoleInactive",
+															"value": null
+														}
+													]
+												},
+												"description": "StartFragment\n\n| 11.736 | Promoção | Válido(a) de 04/2022 a 09/2022 para estrutura geográfica Bairro Cód. 773374 Ipanema, para pessoa PESSOA NIQCFF. |\n\nEndFragment"
+											},
+											"response": []
+										}
+									]
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
 								},
 								{
-									"key": "businessModelCode",
-									"value": "1"
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
 								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Retorno invalido",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 404\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response has a valid JSON body\", function () {\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json;\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ocp-apim-subscription-key",
-								"value": "08489ed1aa2a4640aab02a8082c54cbf",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/promotions/validPromotions",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"promotions",
-								"validPromotions"
-							],
-							"query": [
-								{
-									"key": "personCode",
-									"value": "4516615",
-									"disabled": true
-								},
-								{
-									"key": "collectionMode",
-									"value": "2",
-									"disabled": true
-								},
-								{
-									"key": "businessModelCode",
-									"value": "1",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "personCode",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response has a valid JSON body\", function () {\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json;\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ocp-apim-subscription-key",
-								"value": "08489ed1aa2a4640aab02a8082c54cbf",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/promotions/validPromotions?personCode=&collectionMode=2&businessModelCode=1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"promotions",
-								"validPromotions"
-							],
-							"query": [
-								{
-									"key": "personCode",
-									"value": ""
-								},
-								{
-									"key": "collectionMode",
-									"value": "2"
-								},
-								{
-									"key": "businessModelCode",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "collectionMode",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response has a valid JSON body\", function () {\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json;\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ocp-apim-subscription-key",
-								"value": "08489ed1aa2a4640aab02a8082c54cbf",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/promotions/validPromotions?personCode=4516615&collectionMode=&businessModelCode=1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"promotions",
-								"validPromotions"
-							],
-							"query": [
-								{
-									"key": "personCode",
-									"value": "4516615"
-								},
-								{
-									"key": "collectionMode",
-									"value": ""
-								},
-								{
-									"key": "businessModelCode",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "businessModelCode",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response has a valid JSON body\", function () {\r",
-									"     pm.response.to.be.withBody;\r",
-									"     pm.response.to.be.json;\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "ocp-apim-subscription-key",
-								"value": "08489ed1aa2a4640aab02a8082c54cbf",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/promotions/validPromotions?personCode=4516615&collectionMode=2&businessModelCode",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"promotions",
-								"validPromotions"
-							],
-							"query": [
-								{
-									"key": "personCode",
-									"value": "4516615"
-								},
-								{
-									"key": "collectionMode",
-									"value": "2"
-								},
-								{
-									"key": "businessModelCode",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Promoções válidas de acordo com os parâmetros",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "{{url}}/api/promotions/validPromotions?personCode=6092169&collectionMode=2&businessModelCode=1&geographicalStructureCode=773374",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"promotions",
-						"validPromotions"
-					],
-					"query": [
-						{
-							"key": "personCode",
-							"value": "6092169"
-						},
-						{
-							"key": "collectionMode",
-							"value": "2"
-						},
-						{
-							"key": "businessModelCode",
-							"value": "1"
-						},
-						{
-							"key": "cycleNumber",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "functionCode",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "roleCode",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "commercialStructureCode",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "geographicalStructureCode",
-							"value": "773374"
-						},
-						{
-							"key": "distributionCenterCode",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "isWithdrawalCenter",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "businessRoleActive",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "businessRoleActive",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "businessRoleInactive",
-							"value": "",
-							"disabled": true
-						},
-						{
-							"key": "businessRoleInactive",
-							"value": "",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Valid promotions code list",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/promotions/validPromotions?personCode=-14258573&collectionMode=-14258573&businessModelCode=-14258573&date=1994-07-12T09:19:02.920Z&cycleNumber=-14258573&functionCode=-14258573&roleCode=-14258573&commercialStructureCode=-14258573&geographicalStructureCode=-14258573&distributionCenterCode=-14258573&isWithdrawalCenter=false&businessRoleActive=deserunt consequat esse&businessRoleActive=dolore adipisicing&businessRoleInactive=deserunt consequat esse&businessRoleInactive=dolore adipisicing",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"promotions",
-								"validPromotions"
-							],
-							"query": [
-								{
-									"key": "personCode",
-									"value": "-14258573"
-								},
-								{
-									"key": "collectionMode",
-									"value": "-14258573"
-								},
-								{
-									"key": "businessModelCode",
-									"value": "-14258573"
-								},
-								{
-									"key": "date",
-									"value": "1994-07-12T09:19:02.920Z"
-								},
-								{
-									"key": "cycleNumber",
-									"value": "-14258573"
-								},
-								{
-									"key": "functionCode",
-									"value": "-14258573"
-								},
-								{
-									"key": "roleCode",
-									"value": "-14258573"
-								},
-								{
-									"key": "commercialStructureCode",
-									"value": "-14258573"
-								},
-								{
-									"key": "geographicalStructureCode",
-									"value": "-14258573"
-								},
-								{
-									"key": "distributionCenterCode",
-									"value": "-14258573"
-								},
-								{
-									"key": "isWithdrawalCenter",
-									"value": "false"
-								},
-								{
-									"key": "businessRoleActive",
-									"value": "deserunt consequat esse"
-								},
-								{
-									"key": "businessRoleActive",
-									"value": "dolore adipisicing"
-								},
-								{
-									"key": "businessRoleInactive",
-									"value": "deserunt consequat esse"
-								},
-								{
-									"key": "businessRoleInactive",
-									"value": "dolore adipisicing"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						}
-					],
-					"cookie": [],
-					"body": "[\n  {\n    \"Code\": -97846320,\n    \"ApplicationOrder\": -73158551\n  },\n  {\n    \"Code\": -13245973,\n    \"ApplicationOrder\": 19555251\n  }\n]"
+					"description": "```\nAmbiente DEV\n-Dev_url: https://api-gw-vd-hmldev.azure-api.net/deud-vd-promo/vd-promo-catalog/api\n-Dev-ocp-apim-subscription-key: 08489ed1aa2a4640aab02a8082c54cbf' \n\n```"
 				}
 			]
 		}
@@ -595,8 +2508,7 @@
 					"pm.test(\"Response has a valid JSON body\", function () {",
 					"     pm.response.to.be.withBody;",
 					"     pm.response.to.be.json;",
-					"});",
-					""
+					"});"
 				]
 			}
 		}
